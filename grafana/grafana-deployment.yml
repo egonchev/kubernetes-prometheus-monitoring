@@ -7,7 +7,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 0.1Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -35,7 +35,6 @@ spec:
       containers:
         - image: grafana/grafana:latest
           name: grafana
-          imagePullPolicy: IfNotPresent
           env:
             - name: GF_SECURITY_ADMIN_PASSWORD
               value: password
