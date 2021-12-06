@@ -26,8 +26,26 @@ spec:
           ports:
             - containerPort: 3000
           volumeMounts:
-          - name: grafana-persistent-storage
-            mountPath: /var/lib/grafana
+            - name: grafana-persistent-storage
+              mountPath: /var/lib/grafana
+            - name: grafana-config-volume
+              mountPath: /etc/grafana/           
+              #      securityContext:
+              #        runAsNonRoot: true
+        #        runAsUser: 65534
+        #        fsGroup: 472              
       volumes:
       - name: grafana-persistent-storage
         emptyDir: {}
+      - name: grafana-config-volume
+        configMap:
+          name: grafana-config-map
+          items:
+          - key: grafana.ini
+            path: grafana.ini
+          - key: datasource.yml
+            path: provisioning/datasources/datasource.yml
+          - key: dashboards.yml
+            path: provisioning/dashboards/dashboards.yml
+          - key: dashboard.json
+            path: dashboard.json
