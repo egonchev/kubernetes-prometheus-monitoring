@@ -27,6 +27,8 @@ spec:
               mountPath: /etc/prometheus/
             - name: prometheus-storage-volume
               mountPath: /prometheus/
+            - name: prometheus-read-rules-volume
+              mountPath: /etc/prometheus/rules
         - name: watch
           image: weaveworks/watch:latest
           imagePullPolicy: IfNotPresent
@@ -39,6 +41,11 @@ spec:
           configMap:
             defaultMode: 420
             name: prometheus-server-conf
+            
+        - name: prometheus-read-rules-volume
+          configMap:
+            defaultMode: 420
+            name: prometheus-read-rules
 
         - name: prometheus-storage-volume
           emptyDir: {}
