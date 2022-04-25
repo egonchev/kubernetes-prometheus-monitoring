@@ -27,8 +27,8 @@ data:
           regex: 9093
           
     rule_files:
-    - rules/*_rules.yml
-    - rules/*_alerts.yml
+    - "/var/prometheus/rules/*_rules.yml"
+    - "/var/prometheus/rules/*_alerts.yml"
 
     scrape_configs:
       - job_name: 'node-exporter'
