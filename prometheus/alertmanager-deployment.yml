@@ -15,10 +15,9 @@ spec:
         image: prom/alertmanager:latest
         args:
           - "--config.file=/etc/alertmanager/config.yml"
-          - "--storage.path=/alertmanager"
+          - "--storage.path=/data"
         ports:
-        - name: alertmanager
-          containerPort: 9093
+        - containerPort: 9093
         resources:
             requests:
               cpu: 1
@@ -29,11 +28,12 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /etc/alertmanager
-        - name: alertmanager
-          mountPath: /alertmanager
+        - name: storage-volume
+          mountPath: /data
       volumes:
-      - name: config-volume
-        configMap:
-          name: alertmanager-config
-      - name: alertmanager
+        - configMap:
+            defaultMode: 420
+            name: alertmanager-conf
+          name: config-volume
+      - name: storage-volume
         emptyDir: {}
