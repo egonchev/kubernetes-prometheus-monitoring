@@ -20,7 +20,7 @@ data:
     - name: alert-emailer
       email_configs:
       - to: 'ec2-user@localhost'
-        send_resolved: true
+        send_resolved: false
         from: 'alertmanager@localhost'
         smarthost: 'localhost:25'
         require_tls: false
