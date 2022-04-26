@@ -5,6 +5,9 @@ metadata:
   namespace: monitoring
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: alertmanager  
   template:
     metadata:
       labels:
@@ -35,5 +38,5 @@ spec:
             defaultMode: 420
             name: alertmanager-conf
           name: config-volume
-      - name: storage-volume
-        emptyDir: {}
+        - emptyDir: {}
+          name: storage-volume
